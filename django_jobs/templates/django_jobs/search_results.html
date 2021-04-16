@@ -1,0 +1,28 @@
+{% extends 'django_jobs/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>You asked for it!</h2>
+    <h2>Search results...</h2>
+    <hr>
+</div>
+
+<div class="container">
+    <ul>
+        {% if object_list %}
+            {% for result in object_list %}
+                <ul>
+                    <h4> Job opening: {{ result.title }} </h4>
+                        <p>Company:<a href="{% url 'django_jobs:company-detail' result.company.id %}"> {{ result.company }}</a></p>
+                        <p> Posted on: {{ result.date }}</p>
+                        <button type="button" class="btn btn-light"><a href="{{result.link}}">Check the details</a></button>
+                        <hr>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <h4>Sorry, no results!</h4>
+            <p>Try with another keyword.</p>
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}

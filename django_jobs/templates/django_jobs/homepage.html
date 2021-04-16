@@ -1,0 +1,29 @@
+{% extends 'django_jobs/base.html' %}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+        <form action="{% url 'django_jobs:search' %}" method="get">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Search here.</label>
+            <input name="query" type="text" class="form-control" id="exampleInputPassword1" placeholder="Let's take a look">
+        </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <h3>Good luck!</h3>
+            {% for job in jobs_list %}
+            <div class="container-fluid">
+            <ul>
+                <p>Job opening: {{ job.title }}</p>
+                <p>Company:<a href="{% url 'django_jobs:company-detail' job.company.id %}"> {{ job.company }}</a></p>
+                <p>Date posted: {{ job.date }}</p>
+                <button type="button" class="btn btn-light"><a href="{{job.link}}">Go check the description</a></button>
+                <hr>
+            </ul>
+            </div>
+            {% endfor %}
+    </div>
+{% endblock %}
